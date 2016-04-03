@@ -1,0 +1,37 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%-- 分页 --%>
+<div class="pagination pagination-blue">
+
+	<c:if test="${requestScope.pageBean.currentPage > 1}">
+		<a href="javascript:void(0);" onclick="gotoPage(1);">首页</a>
+		<a href="javascript:void(0);" onclick="gotoPage(${ requestScope.pageBean.currentPage - 1 });">上一页</a>
+	</c:if>
+
+	<c:forEach var="num" begin="${ requestScope.pageBean.beginPageIndex }" end="${ requestScope.pageBean.endPageIndex }">
+		<c:choose>
+			<c:when test="${ num == requestScope.pageBean.currentPage }">
+				<a href="javascript:void(0);" class="active">${ num }</a>
+			</c:when>
+			<c:otherwise>
+				<a href="javascript:void(0);" onclick="gotoPage(${ num });">${ num }</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+
+	<c:if test="${ requestScope.pageBean.currentPage < requestScope.pageBean.totalPage }">
+		<a href="javascript:void(0);" onclick="gotoPage(${ requestScope.pageBean.currentPage + 1 });">下一页</a>
+		<a href="javascript:void(0);" onclick="gotoPage(${ requestScope.pageBean.totalPage });">末页</a>
+	</c:if>
+
+</div>
+
+<script type="text/javascript">
+	function gotoPage(pageNum) {
+		var $queryForm = $("form[name='queryForm']");
+		$queryForm.append("<input type='hidden' name='pageNum' value='" + pageNum + "' />");
+		$queryForm.submit();
+	}
+</script>

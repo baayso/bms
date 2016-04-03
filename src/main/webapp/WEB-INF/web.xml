@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID"
+    version="3.1">
+
+    <!-- Web容器加载顺序：ServletContext -> context-param -> listener -> filter -> servlet -->
+
+    <!-- 用于初始化权限（菜单）数据的监听器 -->
+    <listener>
+        <listener-class>com.baayso.bms.listener.InitServletContextListener</listener-class>
+    </listener>
+
+    <!-- 定期检查在线记录，并删除那些长时间没有重新请求过的记录 -->
+    <listener>
+        <listener-class>com.baayso.bms.user.listener.OnlineListener</listener-class>
+    </listener>
+
+    <!-- 监听每次用户请求
+        <listener>
+        <listener-class>com.baayso.bms.user.listener.RequestListener</listener-class>
+        </listener>
+    -->
+
+    <!-- 权限判断的过滤器 -->
+    <filter>
+        <filter-name>checkPrivilegeFilter</filter-name>
+        <filter-class>com.baayso.bms.filter.CheckPrivilegeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>checkPrivilegeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 过滤每次用户请求 -->
+    <filter>
+        <filter-name>requestFilter</filter-name>
+        <filter-class>com.baayso.bms.user.filter.RequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>requestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.baayso.bms.user.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/jsp/user/UserServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OnlineUserServlet</servlet-name>
+        <servlet-class>com.baayso.bms.user.OnlineUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OnlineUserServlet</servlet-name>
+        <url-pattern>/jsp/user/OnlineUserServlet</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <display-name>Bill Manager System Web App</display-name>
+
+</web-app>

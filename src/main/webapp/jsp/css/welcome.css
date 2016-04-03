@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.welcome {
+    font-size: 37px;
+    line-height: 200px;
+    text-align: center;
+    position: absolute;
+    _position: static;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow: hidden;
+    _overflow: hidden;
+    _height: 100%;
+    _margin-left: 178px;
+}
+
+.welcome i {
+    font-size: 50px;
+}

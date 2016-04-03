@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+body {
+    font-size: 14px;
+}
+
+/* 覆盖quick.css里的menu样式 */
+.menu-stacked ul {
+    border: 0px;
+}
+
+/* 覆盖quick.css里的menu样式 */
+.menu-stacked ul li a i {
+    padding: 0 7px;
+}
+
+/* 覆盖quick.css里的menu样式 */
+.menu-stacked ul li a:hover, .menu-stacked ul li.active a {
+    background-color: #ebf3fc;
+    color: #333;
+}
+
+.menu-stacked ul li a:hover [class^="icon-"]:before, .menu-stacked ul li a:hover [class*=" icon-"]:before {
+    font-size: 28px;
+    vertical-align: -5px;
+}

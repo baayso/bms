@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.loginDiv {
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    margin: -100px 0 0 -150px;
+}

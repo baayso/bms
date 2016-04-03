@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+label.error {
+    color: #FF0000;
+    /* margin-right: 0px; */
+}
+
+.textBold {
+    font-weight: bold;
+}
+
+.list {
+    padding-left: 30px;
+    padding-right: 50px;
+}
+
+.query {
+    height: 55px;
+    padding-top: 17px;
+    border-bottom: 1px solid #78A7D3;
+}
+
+.add {
+    padding-top: 20px;
+    height: 40px;
+    border-bottom: 1px solid #78A7D3;
+}
+
+.font_size_13 {
+    font-size: 13px;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+.width_96 {
+    width: 96px;
+}
+
+.width_193 {
+    width: 193px;
+}
+
+.width_720 {
+    width: 720px;
+}
+
+.width_830 {
+    width: 830px;
+}
+
+.none {
+    display: none;
+}
+
+.inline {
+    display: inline;
+}
+
+.pagination a.active {
+    cursor: default;
+}
+
+.pagination-blue a.active {
+    cursor: default;
+}
+
+.pagination-green a.active {
+    cursor: default;
+}
+
+/* quick.css中select的高度为34px */
+select {
+    height: 32px; /* safari不支持height属性 */
+    line-height: 26px; /* 仅有safari支持line-height属性，通过设置此属性修正select的高度 */
+}
+
+/* 覆盖quick.css中的样式 */
+input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus, textarea:hover, textarea:focus, select:hover, select:focus {
+    border: 1px solid #0079bc;
+}
+
+button[type="button"]:disabled, button[type="submit"]:disabled {
+    background-color: #333;
+}
+
+input[type="text"]:disabled, input[type="password"]:disabled, textarea:disabled, select:disabled {
+    background-color: #f0f0f0;
+}
