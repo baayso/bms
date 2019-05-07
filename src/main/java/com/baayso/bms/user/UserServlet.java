@@ -29,15 +29,15 @@ public class UserServlet extends HttpServlet {
 
     private static final Logger log = Log.get();
 
-    private static final String METHOD_LOGIN = "LOGIN";
-    private static final String METHOD_LOGOUT = "LOGOUT";
-    private static final String METHOD_ADD_UI = "ADD_UI";
-    private static final String METHOD_ADD = "ADD";
-    private static final String METHOD_DEL = "DEL";
-    private static final String METHOD_UPDATE_UI = "UPDATE_UI";
-    private static final String METHOD_UPDATE = "UPDATE";
-    private static final String METHOD_UPDATE_PWD = "UPDATE_PWD";
-    private static final String METHOD_LIST = "LIST";
+    private static final String METHOD_LOGIN            = "LOGIN";
+    private static final String METHOD_LOGOUT           = "LOGOUT";
+    private static final String METHOD_ADD_UI           = "ADD_UI";
+    private static final String METHOD_ADD              = "ADD";
+    private static final String METHOD_DEL              = "DEL";
+    private static final String METHOD_UPDATE_UI        = "UPDATE_UI";
+    private static final String METHOD_UPDATE           = "UPDATE";
+    private static final String METHOD_UPDATE_PWD       = "UPDATE_PWD";
+    private static final String METHOD_LIST             = "LIST";
     private static final String METHOD_CHECK_LOGIN_NAME = "CHECK_LOGIN_NAME";
 
     // Servlet是单实例的，使用有状态的成员变量会造成多线程问题
