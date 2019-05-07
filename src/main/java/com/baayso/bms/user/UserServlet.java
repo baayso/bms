@@ -233,7 +233,7 @@ public class UserServlet extends HttpServlet {
     private void del(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
         if (CharacterUtil.isEmpty(id) || !(36 == id.length())) {
-            log.error("Serlvet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
+            log.error("Servlet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
             return;
         }
 
@@ -241,7 +241,7 @@ public class UserServlet extends HttpServlet {
         User user = userService.find(id);
 
         if (null == user) {
-            log.error("Serlvet：数据校验失败，待删除的用户不存在！");
+            log.error("Servlet：数据校验失败，待删除的用户不存在！");
             return;
         }
 
@@ -249,12 +249,12 @@ public class UserServlet extends HttpServlet {
         User currentUser = (User) request.getSession().getAttribute(ConstantUtil.CURRENT_USER);
 
         if (user.getLoginName().equals(currentUser.getLoginName())) { // 不可删除当前登录用户
-            log.error("Serlvet：数据校验失败，当前登录用户不可删除！");
+            log.error("Servlet：数据校验失败，当前登录用户不可删除！");
             return;
         }
 
         if ("admin".equals(user.getLoginName())) { // 不可以删除"admin"用户
-            log.error("Serlvet：数据校验失败，超级管理员“admin”不可以删除！");
+            log.error("Servlet：数据校验失败，超级管理员“admin”不可以删除！");
             return;
         }
 
@@ -271,7 +271,7 @@ public class UserServlet extends HttpServlet {
     private void updateUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         if (CharacterUtil.isEmpty(id) || !(36 == id.length())) {
-            log.error("Serlvet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
+            log.error("Servlet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
             return;
         }
 
@@ -382,7 +382,7 @@ public class UserServlet extends HttpServlet {
             response.sendRedirect("UserServlet?method=LIST");
         }
         else {
-            log.error("Serlvet：修改（更改）用户信息失败！");
+            log.error("Servlet：修改（更改）用户信息失败！");
         }
     }
 
@@ -440,7 +440,7 @@ public class UserServlet extends HttpServlet {
             response.sendRedirect("UserServlet?method=LIST");
         }
         else {
-            log.error("Serlvet：修改（更改）用户密码失败！");
+            log.error("Servlet：修改（更改）用户密码失败！");
         }
 
     }
