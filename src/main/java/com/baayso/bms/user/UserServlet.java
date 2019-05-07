@@ -225,7 +225,7 @@ public class UserServlet extends HttpServlet {
             response.sendRedirect("UserServlet?method=LIST");
         }
         else {
-            log.error("Serlvet：新增用户信息失败！");
+            log.error("Servlet：新增用户信息失败！");
         }
     }
 
@@ -301,7 +301,7 @@ public class UserServlet extends HttpServlet {
 
         // 数据校验
         if (CharacterUtil.isEmpty(id) || !(36 == id.length())) {
-            log.error("Serlvet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
+            log.error("Servlet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
             return;
         }
 
@@ -396,7 +396,7 @@ public class UserServlet extends HttpServlet {
 
         // 数据校验
         if (CharacterUtil.isEmpty(id) || !(36 == id.length())) {
-            log.error("Serlvet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
+            log.error("Servlet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
             return;
         }
 
