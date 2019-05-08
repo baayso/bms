@@ -40,12 +40,12 @@
 			rules : {
 				loginName : {
 					required : true,
-					remote : '${ pageContext.request.contextPath }/jsp/user/UserServlet?method=CHECK_LOGIN_NAME&isLogin=true',
+					remote : '${ pageContext.request.contextPath }/servlet/user/checkLoginName?isLogin=true',
 					maxlength : 16
 				},
 				password: {
 					required : true,
-					// remote : '${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LOGIN',
+					// remote : '${ pageContext.request.contextPath }/servlet/user/login',
 					maxlength : 16
 				}
 			},

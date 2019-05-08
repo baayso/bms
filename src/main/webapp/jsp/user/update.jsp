@@ -81,7 +81,7 @@
         function del(id) {
         	if (confirm("确定删除用户信息吗？")) {
         		// var roleId = $("input[name='roleId']").attr("checked", true).val();
-				location.href = "${ pageContext.request.contextPath }/jsp/user/UserServlet?method=DEL&id=" + id;
+				location.href = "${ pageContext.request.contextPath }/servlet/user/delete?id=" + id;
 			}
         }
         
@@ -105,7 +105,7 @@
     </div>
 
     <div class="col-1-1">
-        <form id="updateUserForm" name="updateUserForm" class="form form-stacked" method="post" action="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=UPDATE">
+        <form id="updateUserForm" name="updateUserForm" class="form form-stacked" method="post" action="${ pageContext.request.contextPath }/servlet/user/update">
             <fieldset>
 
                 <div class="grid">
@@ -169,7 +169,7 @@
                         <a href="javascript:void(0);" id="btnSave" class="button button-green" onclick="update();" style="display: none;">保存</a>
                         <a href="${ pageContext.request.contextPath }/jsp/user/updatePwd.jsp?id=${user.id}&loginName=${user.loginName}" class="button button-blue">修改密码</a>
                         <a href="javascript:void(0);" onclick="del('${user.id}');" class="button button-red">删除</a>
-                        <a href="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LIST" class="button button-red">返回</a>
+                        <a href="${ pageContext.request.contextPath }/servlet/user/list" class="button button-red">返回</a>
                     </div>
                 </div>
 

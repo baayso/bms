@@ -43,7 +43,7 @@
     </div>
 
     <div class="col-1-1">
-        <form class="form form-stacked" method="post" action="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=ADD">
+        <form class="form form-stacked" method="post" action="${ pageContext.request.contextPath }/servlet/user/add">
             <fieldset>
 
                 <div class="grid">
@@ -96,7 +96,7 @@
 
                     <div class="col-1-1 width_830">
                         <button type="submit" class="button-blue">提交数据</button>
-                        <a href="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LIST" class="button button-red">返回</a>
+                        <a href="${ pageContext.request.contextPath }/servlet/user/list" class="button button-red">返回</a>
                     </div>
                 </div>
 

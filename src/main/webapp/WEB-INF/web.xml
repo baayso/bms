@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID"
-    version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID"
+         version="3.1">
 
     <!-- Web容器加载顺序：ServletContext -> context-param -> listener -> filter -> servlet -->
 
@@ -43,21 +45,12 @@
     </filter-mapping>
 
     <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>com.baayso.bms.user.UserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/jsp/user/UserServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>OnlineUserServlet</servlet-name>
         <servlet-class>com.baayso.bms.user.OnlineUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OnlineUserServlet</servlet-name>
-        <url-pattern>/jsp/user/OnlineUserServlet</url-pattern>
+        <url-pattern>/servlet/user/onlineUser/*</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

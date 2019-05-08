@@ -28,7 +28,7 @@
     </div>
 
     <div>
-        <form class="form form-stacked" method="post" action="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=UPDATE_PWD">
+        <form class="form form-stacked" method="post" action="${ pageContext.request.contextPath }/servlet/user/updatePwd">
             <fieldset>
             	<%--
                 <label>用户编号：</label>
@@ -55,7 +55,7 @@
                 <br/>
                 <span>
                     <button type="submit" class="button-blue">确认修改</button>
-                    <a href="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=UPDATE_UI&id=${param.id}" class="button button-red">返回</a>
+                    <a href="${ pageContext.request.contextPath }/servlet/user/updateUI?id=${param.id}" class="button button-red">返回</a>
                 </span>
             </fieldset>
         </form>

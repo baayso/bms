@@ -15,14 +15,12 @@ import org.slf4j.Logger;
 
 import com.baayso.bms.common.log.Log;
 import com.baayso.bms.common.util.ConstantUtil;
-import com.baayso.bms.common.util.WebUtils;
 import com.baayso.bms.user.User;
 
 /**
  * 过滤器：检查权限
- * 
+ *
  * @author ChenFangjie
- * 
  */
 public class CheckPrivilegeFilter implements Filter {
 
@@ -41,16 +39,11 @@ public class CheckPrivilegeFilter implements Filter {
         // 获取当前登录用户
         User currentUser = (User) request.getSession().getAttribute(ConstantUtil.CURRENT_USER);
 
-        String url = WebUtils.getUrl(request);
+        String url = request.getRequestURI();
 
         log.info("权限过滤器，客户端请求地址: " + url);
 
         if (null == currentUser) { // 用户未登录
-            // 去掉查找到第一个"&"符号后的字符
-            int index = url.indexOf("&");
-            if (index > 0) {
-                url = url.substring(0, index);
-            }
 
             if (url.endsWith(".bmp") //
                     || url.endsWith(".gif") //
@@ -60,8 +53,8 @@ public class CheckPrivilegeFilter implements Filter {
                     || url.endsWith(".js") //
                     || url.endsWith(".css") //
                     || url.endsWith("login.jsp") //
-                    || url.endsWith("method=LOGIN") //
-                    || url.endsWith("method=CHECK_LOGIN_NAME")) { // 登录操作（未登录的用户进行登录操作）
+                    || url.endsWith("/login") //
+                    || url.endsWith("/checkLoginName")) { // 登录操作（未登录的用户进行登录操作）
                 chain.doFilter(req, resp); // 正常执行
             }
             else {

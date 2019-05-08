@@ -37,7 +37,7 @@
 <body>
 <div>
     <div class="loginDiv">
-        <form id="loginForm" name="loginForm" class="form form-aligned" method="post" action="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LOGIN">
+        <form id="loginForm" name="loginForm" class="form form-aligned" method="post" action="${ pageContext.request.contextPath }/servlet/user/login">
             <fieldset>
                 <legend class="textBold">用户登录</legend>
                 <div class="control">

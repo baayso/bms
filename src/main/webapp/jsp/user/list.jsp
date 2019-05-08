@@ -24,7 +24,7 @@
     		// 进行第二次编码
     		$queryLoginName = encodeURI($queryLoginName);
 
-    		window.location.href = "${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LIST&queryLoginName=" + $queryLoginName;
+    		window.location.href = "${ pageContext.request.contextPath }/servlet/user/list?queryLoginName=" + $queryLoginName;
     	}
 
     </script>
@@ -35,11 +35,10 @@
 <div class="list">
     <div class="query">
     	<%-- 需以post方式提交（分页的gotoPage(pageNum)会使用到此from），如果使用get方式会出现乱码，但可以encodeURI()后以get方式传递，服务器在解码 --%>
-        <form class="form" method="post" name="queryForm" action="${ pageContext.request.contextPath }/jsp/user/UserServlet">
+        <form class="form" method="post" name="queryForm" action="${ pageContext.request.contextPath }/servlet/user/list">
             <fieldset>
                 <label>登录名：</label>
                 <label>
-                    <input type="hidden" name="method" value="LIST">
                     <input type="text" id="queryLoginName" name="queryLoginName" value="${ requestScope.queryLoginName }" placeholder="登录名">
                 </label>
                 <label>
@@ -55,7 +54,7 @@
             <a href="javascript:void(0);" class="label label-blue">用户管理 &gt;&gt;</a>
         </span>
         <span class="float_right">
-            <a href="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=ADD_UI" class="button button-green">新增用户</a>
+            <a href="${ pageContext.request.contextPath }/servlet/user/addUI" class="button button-green">新增用户</a>
         </span>
     </div>
 
@@ -77,7 +76,7 @@
             	<c:forEach varStatus="status" var="user" items="${ requestScope.pageBean.recordList }">
             		<tr>
 		                <td>${status.count}</td>
-		                <td><a href="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=UPDATE_UI&id=${ user.id }">${ user.loginName }</a></td>
+		                <td><a href="${ pageContext.request.contextPath }/servlet/user/updateUI?id=${ user.id }">${ user.loginName }</a></td>
 		                <td>${ user.gender }</td>
 		                <td>${ user.birthday }</td>
 		                <td>${ user.tel }</td>
@@ -89,7 +88,7 @@
         </table>
     </div>
 
-    <%-- <form method="post" name="pagingForm" action="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LIST"></form> --%>
+    <%-- <form method="post" name="pagingForm" action="${ pageContext.request.contextPath }/servlet/user/list"></form> --%>
 
     <%-- include分页公共代码 --%>
     <%@ include file="/jsp/common/pageView.jspf" %>

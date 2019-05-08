@@ -25,7 +25,7 @@
     		// 进行第二次编码
     		$queryLoginName = encodeURI($queryLoginName);
 
-    		window.location.href = "${ pageContext.request.contextPath }/jsp/user/OnlineUserServlet?method=LIST&queryLoginName=" + $queryLoginName;
+    		window.location.href = "${ pageContext.request.contextPath }/servlet/user/onlineUser/list?queryLoginName=" + $queryLoginName;
     	}
 
     </script>
@@ -36,11 +36,10 @@
 <div class="list">
     <div class="query">
     	<%-- 需以post方式提交（分页的gotoPage(pageNum)会使用到此from），如果使用get方式会出现乱码，但可以encodeURI()后以get方式传递，服务器在解码 --%>
-        <form class="form" method="post" name="queryForm" action="${ pageContext.request.contextPath }/jsp/user/OnlineUserServlet">
+        <form class="form" method="post" name="queryForm" action="${ pageContext.request.contextPath }/servlet/user/onlineUser/list">
             <fieldset>
                 <label>登录名：</label>
                 <label>
-                    <input type="hidden" name="method" value="LIST">
                     <input type="text" id="queryLoginName" name="queryLoginName" value="${ requestScope.queryLoginName }" placeholder="登录名">
                 </label>
                 <label>
@@ -80,7 +79,7 @@
                                     ${ onlineUser.loginName }
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=UPDATE_UI&id=${ onlineUser.userId }">${ onlineUser.loginName }</a>
+                                    <a href="${ pageContext.request.contextPath }/servlet/user/updateUI?id=${ onlineUser.userId }">${ onlineUser.loginName }</a>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -104,7 +103,7 @@
         </table>
     </div>
 
-    <%-- <form method="post" name="pagingForm" action="${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LIST"></form> --%>
+    <%-- <form method="post" name="pagingForm" action="${ pageContext.request.contextPath }/servlet/user/list"></form> --%>
 
     <%-- include分页公共代码 --%>
     <%@ include file="/jsp/common/pageView.jspf" %>

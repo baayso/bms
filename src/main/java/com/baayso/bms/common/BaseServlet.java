@@ -1,5 +1,6 @@
 package com.baayso.bms.common;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 
 import com.baayso.bms.common.log.Log;
+import com.baayso.bms.common.util.ConstantUtil;
 
 /**
  * Base Servlet.
@@ -24,14 +26,16 @@ public class BaseServlet extends HttpServlet {
     private static final Logger log = Log.get();
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        req.setCharacterEncoding(ConstantUtil.UTF_8);
 
         // 1.获取请求路径
         String uri = req.getRequestURI();
         log.debug("request uri: {}", uri);
 
         // 2.从uri中获取方法名称
-        String methodName = uri.substring(uri.lastIndexOf('/'));
+        String methodName = uri.substring(uri.lastIndexOf('/') + 1);
         log.debug("method name: {}", methodName);
 
         try {

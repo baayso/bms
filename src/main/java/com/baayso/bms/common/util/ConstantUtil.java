@@ -1,10 +1,12 @@
 package com.baayso.bms.common.util;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * 常量
- * 
+ *
  * @author ChenFangjie
- * 
+ *
  */
 public final class ConstantUtil {
 
@@ -38,5 +40,10 @@ public final class ConstantUtil {
 
     /** 长时间格式 */
     public static final String LONG_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    public static final String UTF_8 = StandardCharsets.UTF_8.toString();
+
+    /** HTTP状态码-OK */
+    public static final int HTTP_OK = 200;
 
 }

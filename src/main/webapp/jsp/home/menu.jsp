@@ -34,7 +34,7 @@
             if (confirm("确认退出系统吗？")) {
                 // 如果当前窗口不存在上级，那么window.parent也不会为null，而是等于window。所以判断时使用!= window
                 if (window.parent != window) {
-                    window.parent.location.href = "${ pageContext.request.contextPath }/jsp/user/UserServlet?method=LOGOUT";
+                    window.parent.location.href = "${ pageContext.request.contextPath }/servlet/user/logout";
                 }
             }
         }
@@ -53,7 +53,7 @@
             <c:forEach var="privilege" items="${ sessionScope.currentUser.role.privileges }">
             	<c:if test="${ privilege.parent eq null }">
             		<li>
-						<a href="${ pageContext.request.contextPath }/jsp/${ privilege.url }" target="main_iframe" onclick="select(this);"><i class="icon-list-alt"></i>${ privilege.name }</a>
+						<a href="${pageContext.request.contextPath}${privilege.url}" target="main_iframe" onclick="select(this);"><i class="icon-list-alt"></i>${ privilege.name }</a>
             		</li>
             	</c:if>
             </c:forEach>

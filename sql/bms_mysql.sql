@@ -42,26 +42,26 @@ CREATE TABLE t_privilege (
 );
 
 -- 1
-INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '用户管理', 'user/UserServlet?method=LIST');
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '新增用户', 'user/UserServlet?method=ADD', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '删除用户', 'user/UserServlet?method=DEL', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '更新用户', 'user/UserServlet?method=UPDATE', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '修改密码', 'user/UserServlet?method=UPDATE_PWD', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
+INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '用户管理', '/servlet/user/list');
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '新增用户', '/servlet/user/add', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '删除用户', '/servlet/user/delete', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '更新用户', '/servlet/user/update', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '修改密码', '/servlet/user/updatePwd', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='用户管理'));
 
 -- 6
-INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '供应商管理', 'supplier/SupplierServlet?method=LIST');
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '新增供应商', 'supplier/SupplierServlet?method=ADD', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='供应商管理'));
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '删除供应商', 'supplier/SupplierServlet?method=DEL', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='供应商管理'));
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '更新供应商', 'supplier/SupplierServlet?method=UPDATE', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='供应商管理'));
+INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '供应商管理', '/servlet/supplier/list');
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '新增供应商', '/servlet/supplier/add', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='供应商管理'));
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '删除供应商', '/servlet/supplier/delete', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='供应商管理'));
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '更新供应商', '/servlet/supplier/update', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='供应商管理'));
 
 -- 10
-INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '账单管理', 'bill/BillServlet?method=LIST');
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '新增账单', 'bill/BillServlet?method=ADD', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='账单管理'));
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '删除账单', 'bill/BillServlet?method=DEL', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='账单管理'));
-INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '更新账单', 'bill/BillServlet?method=UPDATE', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='账单管理'));
+INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '账单管理', '/servlet/bill/list');
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '新增账单', '/servlet/bill/add', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='账单管理'));
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '删除账单', '/servlet/bill/delete', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='账单管理'));
+INSERT INTO t_privilege(id, name, url, parentId) VALUES(uuid(), '更新账单', '/servlet/bill/update', (SELECT tp.id FROM t_privilege AS tp WHERE tp.name='账单管理'));
 
 --
-INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '在线用户列表', 'user/OnlineUserServlet?method=LIST');
+INSERT INTO t_privilege(id, name, url) VALUES(uuid(), '在线用户列表', '/servlet/user/onlineUser/list');
 
 -- 角色表
 DROP TABLE IF EXISTS t_role;

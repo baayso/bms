@@ -7,12 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 
+import com.baayso.bms.common.BaseServlet;
 import com.baayso.bms.common.log.Log;
 import com.baayso.bms.common.util.CharacterUtil;
 import com.baayso.bms.common.util.ConstantUtil;
@@ -23,90 +24,28 @@ import com.baayso.bms.role.Role;
 import com.baayso.bms.role.RoleService;
 import com.google.gson.Gson;
 
-@Deprecated
-public class UserServlet extends HttpServlet {
+/**
+ * 用户Servlet。
+ *
+ * @author ChenFangjie (2019/5/7 10:12)
+ * @since 1.3.0
+ */
+@WebServlet("/servlet/user/*")
+public class UserServlet2 extends BaseServlet {
 
-    private static final long serialVersionUID = 7355368611155105945L;
+    private static final long serialVersionUID = -5714785465233126142L;
 
     private static final Logger log = Log.get();
 
-    private static final String METHOD_LOGIN            = "LOGIN";
-    private static final String METHOD_LOGOUT           = "LOGOUT";
-    private static final String METHOD_ADD_UI           = "ADD_UI";
-    private static final String METHOD_ADD              = "ADD";
-    private static final String METHOD_DEL              = "DEL";
-    private static final String METHOD_UPDATE_UI        = "UPDATE_UI";
-    private static final String METHOD_UPDATE           = "UPDATE";
-    private static final String METHOD_UPDATE_PWD       = "UPDATE_PWD";
-    private static final String METHOD_LIST             = "LIST";
-    private static final String METHOD_CHECK_LOGIN_NAME = "CHECK_LOGIN_NAME";
-
-    // Servlet是单实例的，使用有状态的成员变量会造成多线程问题
-    // private UserService userService = new UserService();
-    // private RoleService roleService = new RoleService();
-
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request, response);
-    }
-
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-
-        String method = request.getParameter("method");
-
-        log.debug("Servlet：请求参数：method={}", method);
-
-        if (CharacterUtil.isEmpty(method)) {
-            log.error("访问路径缺少method参数！");
-            return;
-        }
-        else if (METHOD_LOGIN.equals(method)) {
-            this.login(request, response);
-        }
-        else if (METHOD_LOGOUT.equals(method)) {
-            this.logout(request, response);
-        }
-        else if (METHOD_ADD_UI.equals(method)) {
-            this.addUI(request, response);
-        }
-        else if (METHOD_ADD.equals(method)) {
-            this.add(request, response);
-        }
-        else if (METHOD_DEL.equals(method)) {
-            this.del(request, response);
-        }
-        else if (METHOD_UPDATE_UI.equals(method)) {
-            this.updateUI(request, response);
-        }
-        else if (METHOD_UPDATE.equals(method)) {
-            this.update(request, response);
-        }
-        else if (METHOD_UPDATE_PWD.equals(method)) {
-            this.updatePwd(request, response);
-        }
-        else if (METHOD_LIST.equals(method)) {
-            this.list(request, response);
-        }
-        else if (METHOD_CHECK_LOGIN_NAME.equals(method)) {
-            this.checkLoginName(request, response);
-        }
-        else {
-            log.error("请求地址的method参数不正确！");
-            return;
-        }
-    }
-
     // 用户登录
-    private void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String loginName = request.getParameter("loginName");
         String password = request.getParameter("password");
 
         // 数据校验
         if (!ValidateUtil.validateLoginName(loginName) && !ValidateUtil.validatePassword(password)) {
             log.error("Servlet：数据校验失败，用户名或密码不符合要求！");
-            response.sendRedirect("../home/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/jsp/home/login.jsp");
             return;
         }
 
@@ -118,34 +57,34 @@ public class UserServlet extends HttpServlet {
             log.info("Servlet：用户 {} 登录成功！", currentUser.getLoginName());
             // 登录成功，将用户对象存入Session作用域中
             request.getSession().setAttribute(ConstantUtil.CURRENT_USER, currentUser);
-            response.sendRedirect("../home/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/jsp/home/index.jsp");
         }
         else {
             log.error("Servlet：登录失败，登录名或密码错误！");
-            response.sendRedirect("../home/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/jsp/home/login.jsp");
         }
     }
 
     // 用户注销（退出）
-    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User currentUser = (User) request.getSession().getAttribute(ConstantUtil.CURRENT_USER);
         log.info("Servlet：用户：" + currentUser.getLoginName() + " 退出！");
 
         request.getSession().invalidate();
 
-        response.sendRedirect("../home/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/jsp/home/login.jsp");
     }
 
     // 添加用户页面（准备页面上所需的数据）
-    private void addUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void addUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RoleService roleService = new RoleService();
         List<Role> roleList = roleService.findAll(); // 查询出添加用户页面上所需的角色列表信息
         request.setAttribute("roleList", roleList);
-        request.getRequestDispatcher("add.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/user/add.jsp").forward(request, response);
     }
 
     // 新增用户信息
-    private void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String loginName = request.getParameter("loginName");
         String password = request.getParameter("password");
         String rePassword = request.getParameter("rePassword");
@@ -223,7 +162,7 @@ public class UserServlet extends HttpServlet {
         UserService userService = new UserService();
         // 新增数据
         if (userService.add(user)) {
-            response.sendRedirect("UserServlet?method=LIST");
+            response.sendRedirect(request.getContextPath() + "/servlet/user/list");
         }
         else {
             log.error("Servlet：新增用户信息失败！");
@@ -231,7 +170,7 @@ public class UserServlet extends HttpServlet {
     }
 
     // 删除用户信息
-    private void del(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
         if (CharacterUtil.isEmpty(id) || !(36 == id.length())) {
             log.error("Servlet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
@@ -261,7 +200,7 @@ public class UserServlet extends HttpServlet {
 
         // 执行删除
         if (userService.delete(id)) {
-            response.sendRedirect("UserServlet?method=LIST");
+            response.sendRedirect(request.getContextPath() + "/servlet/user/list");
         }
         else {
             log.error("删除用户信息失败！");
@@ -269,7 +208,7 @@ public class UserServlet extends HttpServlet {
     }
 
     // 查看用户的详细信息（准备编辑用户页面的数据）
-    private void updateUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void updateUI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         if (CharacterUtil.isEmpty(id) || !(36 == id.length())) {
             log.error("Servlet：数据校验失败，id参数不正确，可能为空或长度不符合要求！");
@@ -284,11 +223,11 @@ public class UserServlet extends HttpServlet {
 
         request.setAttribute("roleList", roleList);
         request.setAttribute("user", user);
-        request.getRequestDispatcher("update.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/user/update.jsp").forward(request, response);
     }
 
     // 更新用户信息
-    private void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
         // String oldLoginName = request.getParameter("oldLoginName");
         String loginName = request.getParameter("loginName");
@@ -380,7 +319,7 @@ public class UserServlet extends HttpServlet {
 
         // 更新数据
         if (userService.update(user)) {
-            response.sendRedirect("UserServlet?method=LIST");
+            response.sendRedirect(request.getContextPath() + "/servlet/user/list");
         }
         else {
             log.error("Servlet：修改（更改）用户信息失败！");
@@ -388,7 +327,7 @@ public class UserServlet extends HttpServlet {
     }
 
     // 修改密码
-    private void updatePwd(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void updatePwd(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
         // String loginName = request.getParameter("loginName"); // 被修改密码的用户
         String oldPassword = request.getParameter("oldPassword");
@@ -438,7 +377,7 @@ public class UserServlet extends HttpServlet {
 
         // 修改密码
         if (userService.modifyPassword(id, newPassword)) {
-            response.sendRedirect("UserServlet?method=LIST");
+            response.sendRedirect(request.getContextPath() + "/servlet/user/list");
         }
         else {
             log.error("Servlet：修改（更改）用户密码失败！");
@@ -447,14 +386,14 @@ public class UserServlet extends HttpServlet {
     }
 
     // 查询用户列表
-    private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pageNumStr = request.getParameter("pageNum"); // 当前页码
         String queryLoginName = request.getParameter("queryLoginName"); // 页面上的查询条件（根据登录名进行查询）
 
         if (null != queryLoginName) {
             // request.getParameter(...)会进行第一次解码
             // 再调用 java.net.URLDecoder.decode(String s, String enc) 方法进行第二次解码
-            queryLoginName = URLDecoder.decode(queryLoginName, "UTF-8");
+            queryLoginName = URLDecoder.decode(queryLoginName, ConstantUtil.UTF_8);
         }
 
         int pageNum = 1; // 当前页码（默认为第1页）
@@ -469,11 +408,11 @@ public class UserServlet extends HttpServlet {
 
         request.setAttribute("queryLoginName", queryLoginName); // 回显查询条件
         request.setAttribute("pageBean", pageBean);
-        request.getRequestDispatcher("list.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/user/list.jsp").forward(request, response);
     }
 
     // 验证登录名是否已经存在
-    private void checkLoginName(HttpServletRequest request, HttpServletResponse response) {
+    public void checkLoginName(HttpServletRequest request, HttpServletResponse response) {
         String loginName = request.getParameter("loginName");
         // 为true则表示是登录时的验证，否则是新增或修改用户时的验证
         boolean isLogin = Boolean.parseBoolean(request.getParameter("isLogin"));
@@ -489,7 +428,7 @@ public class UserServlet extends HttpServlet {
 
         String result = new Gson().toJson(isAvailable);
 
-        WebUtils.writeJson(response, result, 200);
+        WebUtils.writeJson(response, result, ConstantUtil.HTTP_OK);
     }
 
 }

@@ -53,26 +53,26 @@ create table t_privilege(
 );
 
 -- 1
-insert into t_privilege(id, name, url) values(get_uuid(), '用户管理', 'user/UserServlet?method=LIST');
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '新增用户', 'user/UserServlet?method=ADD', (select id from t_privilege where name='用户管理'));
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '删除用户', 'user/UserServlet?method=DEL', (select id from t_privilege where name='用户管理'));
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '更新用户', 'user/UserServlet?method=UPDATE', (select id from t_privilege where name='用户管理'));
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '修改密码', 'user/UserServlet?method=UPDATE_PWD', (select id from t_privilege where name='用户管理'));
+insert into t_privilege(id, name, url) values(get_uuid(), '用户管理', '/servlet/user/list');
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '新增用户', '/servlet/user/add', (select id from t_privilege where name='用户管理'));
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '删除用户', '/servlet/user/delete', (select id from t_privilege where name='用户管理'));
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '更新用户', '/servlet/user/update', (select id from t_privilege where name='用户管理'));
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '修改密码', '/servlet/user/updatePwd', (select id from t_privilege where name='用户管理'));
 
 -- 6
-insert into t_privilege(id, name, url) values(get_uuid(), '供应商管理', 'supplier/SupplierServlet?method=LIST');
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '新增供应商', 'supplier/SupplierServlet?method=ADD', (select id from t_privilege where name='供应商管理'));
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '删除供应商', 'supplier/SupplierServlet?method=DEL', (select id from t_privilege where name='供应商管理'));
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '更新供应商', 'supplier/SupplierServlet?method=UPDATE', (select id from t_privilege where name='供应商管理'));
+insert into t_privilege(id, name, url) values(get_uuid(), '供应商管理', '/servlet/supplier/list');
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '新增供应商', '/servlet/supplier/add', (select id from t_privilege where name='供应商管理'));
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '删除供应商', '/servlet/supplier/delete', (select id from t_privilege where name='供应商管理'));
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '更新供应商', '/servlet/supplier/update', (select id from t_privilege where name='供应商管理'));
 
 -- 10
-insert into t_privilege(id, name, url) values(get_uuid(), '账单管理', 'bill/BillServlet?method=LIST');
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '新增账单', 'bill/BillServlet?method=ADD', (select id from t_privilege where name='账单管理'));
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '删除账单', 'bill/BillServlet?method=DEL', (select id from t_privilege where name='账单管理'));
-insert into t_privilege(id, name, url, parentId) values(get_uuid(), '更新账单', 'bill/BillServlet?method=UPDATE', (select id from t_privilege where name='账单管理'));
+insert into t_privilege(id, name, url) values(get_uuid(), '账单管理', '/servlet/bill/list');
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '新增账单', '/servlet/bill/add', (select id from t_privilege where name='账单管理'));
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '删除账单', '/servlet/bill/delete', (select id from t_privilege where name='账单管理'));
+insert into t_privilege(id, name, url, parentId) values(get_uuid(), '更新账单', '/servlet/bill/update', (select id from t_privilege where name='账单管理'));
 
 --
-insert into t_privilege(id, name, url) values(get_uuid(), '在线用户列表', 'user/OnlineUserServlet?method=LIST');
+insert into t_privilege(id, name, url) values(get_uuid(), '在线用户列表', '/servlet/user/onlineUser/list');
 
 -- 角色表
 drop table t_role;
