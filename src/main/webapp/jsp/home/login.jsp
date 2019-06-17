@@ -13,6 +13,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="author" content="陈芳杰（baayso@qq.com）"/>
 
+    <%-- <base href="<%=basePath %>"/> -->
+
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/jsp/lib/quick.css"/>
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/jsp/css/public.css"/>
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/jsp/css/login.css"/>
